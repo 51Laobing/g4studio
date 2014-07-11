@@ -21,6 +21,7 @@ import org.g4studio.core.properties.PropertiesFile;
 import org.g4studio.core.properties.PropertiesHelper;
 import org.g4studio.core.util.G4Constants;
 import org.g4studio.core.util.G4Utils;
+import org.g4studio.system.common.dao.vo.UserInfoVo;
 import org.g4studio.system.common.util.SystemConstants;
 
 /**
@@ -111,6 +112,65 @@ public class BaseAction extends DispatchAction {
 		}
 		return sessionContainer;
 	}
+	
+	/**
+	 * 获取一个SessionContainer容器,如果为null则创建之
+	 * 
+	 * @param form
+	 * @param obj
+	 */
+	protected SessionContainer cleanSessionContainer(HttpServletRequest request) {
+		SessionContainer sessionContainer = (SessionContainer) this.getSessionAttribute(request, "SessionContainer");
+		if (sessionContainer == null) {
+			sessionContainer = new SessionContainer();
+			HttpSession session = request.getSession(true);
+			session.setAttribute("SessionContainer", sessionContainer);
+		}
+		else
+		{
+			sessionContainer.cleanUp();
+			HttpSession session = request.getSession(true);
+			session.setAttribute("SessionContainer", sessionContainer);
+		}
+		return sessionContainer;
+	}
+	
+	
+	/**
+	 * 获取一个SessionContainer容器,如果为null则创建之
+	 * 
+	 * @param form
+	 * @param obj
+	 */
+	protected SessionContainer setSessionContainer(HttpServletRequest request,UserInfoVo userInfo) {
+		SessionContainer sessionContainer = (SessionContainer) this.getSessionAttribute(request, "SessionContainer");
+		if (sessionContainer == null) {
+			sessionContainer = new SessionContainer();
+			sessionContainer.setUserInfo(userInfo);
+			HttpSession session = request.getSession(true);
+			session.setAttribute("SessionContainer", sessionContainer);
+		}
+		else
+		{
+			sessionContainer.setUserInfo(userInfo);
+			HttpSession session = request.getSession(true);
+			session.setAttribute("SessionContainer", sessionContainer);
+		}
+		return sessionContainer;
+	}
+	
+	/**
+	 * 获取一个SessionContainer容器,如果为null则创建之
+	 * 
+	 * @param form
+	 * @param obj
+	 */
+	protected void refreshSessionContainer(HttpServletRequest request,SessionContainer sessionContainer) {
+		
+			HttpSession session = request.getSession(true);
+			session.setAttribute("SessionContainer", sessionContainer);
+	}
+
 
 	/**
 	 * 将请求参数封装为Dto

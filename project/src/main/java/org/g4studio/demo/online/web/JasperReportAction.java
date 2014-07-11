@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.g4studio.common.util.SessionContainer;
 import org.g4studio.common.web.BaseAction;
 import org.g4studio.common.web.BaseActionForm;
 import org.g4studio.core.metatype.Dto;
@@ -33,7 +34,8 @@ public class JasperReportAction extends BaseAction {
 	 */
 	public ActionForward appletInit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		super.getSessionContainer(request).cleanUp();
+//		super.getSessionContainer(request).cleanUp();
+		super.cleanSessionContainer(request);
 		return mapping.findForward("appletReportView");
 	}
 
@@ -45,7 +47,8 @@ public class JasperReportAction extends BaseAction {
 	 */
 	public ActionForward pdfInit(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		super.getSessionContainer(request).cleanUp();
+//		super.getSessionContainer(request).cleanUp();
+		super.cleanSessionContainer(request);
 		return mapping.findForward("pdfReportView");
 	}
 
@@ -74,7 +77,8 @@ public class JasperReportAction extends BaseAction {
 			HttpServletResponse response) throws Exception {
 		Dto dto = new BaseDto();
 		dto.put("reportTitle", "北京市第一人民医院收费项目明细报表(演示)");
-		dto.put("jbr", getSessionContainer(request).getUserInfo().getUsername());
+		SessionContainer sessionContainer = getSessionContainer(request);
+		dto.put("jbr", sessionContainer.getUserInfo().getUsername());
 		dto.put("jbsj", G4Utils.getCurrentTime());
 		Dto inDto = (BaseDto)getSessionAttribute(request, "QUERYCATALOGS4PRINT_QUERYDTO");
 		List catalogList = g4Reader.queryForList("Demo.queryCatalogsForPrintLimitRows", inDto);
@@ -91,7 +95,8 @@ public class JasperReportAction extends BaseAction {
 		reportData.setParametersDto(dto);
 		reportData.setFieldsList(subList);
 		reportData.setReportFilePath("/report/jasper/demo/hisCatalogReport.jasper");
-		getSessionContainer(request).setReportData("hisCatalogReport", reportData);
+		sessionContainer.setReportData("hisCatalogReport", reportData);
+		this.refreshSessionContainer(request, sessionContainer);
 		return mapping.findForward(null);
 	}
 	

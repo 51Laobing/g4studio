@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.g4studio.common.util.SessionContainer;
 import org.g4studio.common.web.BaseAction;
 import org.g4studio.common.web.BaseActionForm;
 import org.g4studio.core.json.JsonHelper;
@@ -286,14 +287,19 @@ public class IntegrateAction extends BaseAction {
 		Dto dto = new BaseDto();
 		dto.put("reportTitle", "北京市第一人民医院收费项目明细报表(演示)");
 		//制表人
-		dto.put("jbr", getSessionContainer(request).getUserInfo().getUsername());
+		SessionContainer sessionContainer = getSessionContainer(request);
+		dto.put("jbr", sessionContainer.getUserInfo().getUsername());
 		//制表时间
 		dto.put("jbsj", G4Utils.getCurrentTime());
 		ReportData reportData = new ReportData();
 		reportData.setParametersDto(dto);
 		reportData.setFieldsList(catalogList);
 		reportData.setReportFilePath("/report/jasper/demo/hisCatalogReport.jasper");
-		getSessionContainer(request).setReportData("hisCatalogReport4App", reportData);
+		sessionContainer.setReportData("hisCatalogReport4App", reportData);
+		/**
+		 * 更新报表数据
+		 */
+		refreshSessionContainer(request,sessionContainer);
 		return mapping.findForward(null);
 	}
 	

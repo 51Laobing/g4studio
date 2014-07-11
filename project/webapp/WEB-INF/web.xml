@@ -39,7 +39,16 @@
 		<url-pattern>/rpc/httpinvoker/*</url-pattern>
 	</servlet-mapping>
 	-->
-
+	<filter>
+	    <filter-name>sessionFilter</filter-name>
+	    <filter-class>org.frameworkset.security.session.impl.SessionFilter</filter-class>
+	    
+    </filter>
+ 
+	 <filter-mapping>
+	   <filter-name>sessionFilter</filter-name>
+	   <url-pattern>*.do</url-pattern>
+	 </filter-mapping>
 	<!-- 演示使用客户端Applet[RunAsApplet.java]调用服务器端Servlet -->
 	<servlet>
 		<servlet-name>myServlet</servlet-name>

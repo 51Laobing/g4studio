@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.g4studio.common.util.SessionContainer;
 import org.g4studio.common.util.SessionListener;
 import org.g4studio.common.util.WebUtils;
 import org.g4studio.common.web.BaseAction;
@@ -110,7 +111,8 @@ public class LoginAction extends BaseAction {
 			write(jsonDto.toJson(), response);
 			return mapping.findForward("");
 		}
-		super.getSessionContainer(request).setUserInfo(userInfo);
+		setSessionContainer(request,userInfo);
+//		super.getSessionContainer(request).setUserInfo(userInfo);
 		log.info(userInfo.getUsername() + "[" + userInfo.getAccount() + "]" + "成功登录系统!创建了一个有效Session连接,会话ID:["
 				+ request.getSession().getId() + "]" + G4Utils.getCurrentTime());
 		SessionListener.addSession(request.getSession(), userInfo); // 保存有效Session
@@ -160,13 +162,14 @@ public class LoginAction extends BaseAction {
 	 */
 	public ActionForward logout(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		UserInfoVo userInfo = super.getSessionContainer(request).getUserInfo();
+		SessionContainer sessionContainer =super.getSessionContainer(request);
+		UserInfoVo userInfo = sessionContainer.getUserInfo();
 		if (G4Utils.isNotEmpty(userInfo)) {
 			if (g4PHelper.getValue("requestMonitor", "0").equals("1")) {
 				saveLogoutEvent(userInfo, request);
 			}
 			log.info(userInfo.getUsername() + "退出了系统!");
-			super.getSessionContainer(request).setUserInfo(null);
+			sessionContainer.setUserInfo(null);
 		}
 		if (G4Utils.isNotEmpty(request.getSession())) {
 			request.getSession().invalidate();

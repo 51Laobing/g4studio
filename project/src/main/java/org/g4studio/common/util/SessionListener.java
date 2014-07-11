@@ -10,6 +10,8 @@ import javax.servlet.http.HttpSessionListener;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.frameworkset.security.session.Session;
+import org.frameworkset.security.session.SessionEvent;
 import org.g4studio.common.dao.Reader;
 import org.g4studio.core.metatype.Dto;
 import org.g4studio.core.metatype.impl.BaseDto;
@@ -46,6 +48,24 @@ public class SessionListener implements HttpSessionListener {
 	 */
 	public void sessionDestroyed(HttpSessionEvent event) {
 		HttpSession session = event.getSession();
+		if (session == null) return;
+		SessionContainer sessionContainer =  (SessionContainer)session.getAttribute("SessionContainer");
+		if (sessionContainer == null) return;
+		sessionContainer.setUserInfo(null); //配合RequestFilter进行拦截
+		sessionContainer.cleanUp();
+		MonitorService monitorService = (MonitorService)SpringBeanLoader.getSpringBean("monitorService");
+		Dto dto = new BaseDto();
+		dto.put("sessionid", session.getId());
+		monitorService.deleteHttpSession(dto);
+		ht.remove(session.getId());
+		log.info("销毁了一个Session连接:" + session.getId() + " " + G4Utils.getCurrentTime());
+	}
+	
+	/**
+	 * 实现HttpSessionListener接口，完成session销毁事件控制
+	 */
+	public void sessionDestroyed(SessionEvent event) {
+		Session session = event.getSource();
 		if (session == null) return;
 		SessionContainer sessionContainer =  (SessionContainer)session.getAttribute("SessionContainer");
 		if (sessionContainer == null) return;

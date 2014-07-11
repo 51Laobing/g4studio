@@ -3,6 +3,7 @@ package org.g4studio.system.admin.web;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.g4studio.common.util.SessionContainer;
 import org.g4studio.common.util.SpringBeanLoader;
 import org.g4studio.common.web.BaseAction;
 import org.g4studio.common.web.BaseActionForm;
@@ -96,12 +97,14 @@ public class IndexAction extends BaseAction {
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Dto dto = new BaseDto();
 		String layout = request.getParameter("layout");
-		dto.put("userid", super.getSessionContainer(request).getUserInfo().getUserid());
+		SessionContainer sessionContainer = super.getSessionContainer(request);
+		dto.put("userid", sessionContainer.getUserInfo().getUserid());
 		dto.put("layout", layout);
 		Dto outDto = organizationService.saveUserLayout(dto);
-		UserInfoVo userInfoVo = getSessionContainer(request).getUserInfo();
+		UserInfoVo userInfoVo = sessionContainer.getUserInfo();
 		userInfoVo.setLayout(layout);
-		getSessionContainer(request).setUserInfo(userInfoVo);
+		sessionContainer.setUserInfo(userInfoVo);
+		this.refreshSessionContainer(request, sessionContainer);
 		String jsonString = JsonHelper.encodeObject2Json(outDto);
 		write(jsonString, response);
 		return mapping.findForward(null);
@@ -152,7 +155,8 @@ public class IndexAction extends BaseAction {
 	public ActionForward updateUserInfo(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		BaseActionForm cForm = (BaseActionForm)form;
-		UserInfoVo userInfoVo = getSessionContainer(request).getUserInfo();
+		SessionContainer sessionContainer =getSessionContainer(request);
+		UserInfoVo userInfoVo = sessionContainer.getUserInfo();
 		UserService service = (UserService)getService("userService");
 		Dto indDto = cForm.getParamAsDto(request);
 		Dto outDto = new BaseDto(G4Constants.TRUE);
@@ -162,7 +166,8 @@ public class IndexAction extends BaseAction {
 			service.updateUserItem4IndexPage(indDto);
 			outDto.put("flag", G4Constants.SUCCESS);
 			userInfoVo.setPassword(CodeUtil.encryptBase64(indDto.getAsString("password1"), G4Constants.BASE64_KEY));
-			getSessionContainer(request).setUserInfo(userInfoVo);
+			sessionContainer.setUserInfo(userInfoVo);
+			this.refreshSessionContainer(request, sessionContainer);
 		}else {
 			outDto.setSuccess(G4Constants.FALSE);
 			outDto.put("flag", G4Constants.FAILURE);

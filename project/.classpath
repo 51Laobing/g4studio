@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="src" path="src/resources"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0_35"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/abdera-core-1.0.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/abdera-extensions-json-1.0.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/abdera-extensions-main-1.0.jar"/>
@@ -11,9 +11,6 @@
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/ant-1.6.5.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/antlr-2.7.2.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/aopalliance-1.0.jar"/>
-	<classpathentry kind="lib" path="webapp/WEB-INF/lib/asm-2.2.2.jar"/>
-	<classpathentry kind="lib" path="webapp/WEB-INF/lib/asm-commons-2.2.2.jar"/>
-	<classpathentry kind="lib" path="webapp/WEB-INF/lib/asm-util-2.2.2.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/aspectjrt.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/aspectjweaver.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/avalon-logkit-2.1.jar"/>
@@ -22,7 +19,6 @@
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/bcprov-jdk15-1.43.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/bsf-2.3.0.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/bsh-2.0b4.jar"/>
-	<classpathentry kind="lib" path="webapp/WEB-INF/lib/cglib-nodep-2.1_3.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/classes12.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/commons-beanutils-1.7.0.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/commons-chain-1.1.jar"/>
@@ -105,5 +101,17 @@
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/jetty/org.eclipse.jdt.core-3.7.1.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/jetty/javax.servlet-2.5.0.v201103041518.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/jetty/javax.servlet.jsp-2.1.0.v201105211820.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/asm-3.1.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/asm-commons-3.1.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/asm-util-3.1.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/bboss-aop.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/bboss-security.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/bboss-soa.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/cglib-nodep-2.2.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/frameworkset-util.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/jarjar.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/mongo-java-driver-2.12.2.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/mongo-java-driver-javadoc-2.12.2.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/mongo-java-driver-source-2.12.2.jar"/>
 	<classpathentry kind="output" path="webapp/WEB-INF/classes"/>
 </classpath>
