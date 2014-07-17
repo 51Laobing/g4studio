@@ -1,5 +1,6 @@
 package org.g4studio.core.orm.xibatis.sqlmap.engine.mapping.result;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -111,7 +112,7 @@ public class XmlList implements List {
 	}
 
 	public List subList(int fromIndex, int toIndex) {
-		return list.subList(fromIndex, toIndex);
+		return new ArrayList(list.subList(fromIndex, toIndex));
 	}
 
 	public String toString() {

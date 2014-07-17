@@ -1,6 +1,10 @@
 package org.g4studio.core.orm.xibatis.common.util;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 /**
  * Implementation of PaginatedList backed by an ArrayList
@@ -75,7 +79,7 @@ public class PaginatedArrayList implements PaginatedList {
 				}
 				repaginate();
 			} else {
-				page = list.subList(start, end + 1);
+				page = new ArrayList(list.subList(start, end + 1));
 			}
 		}
 	}
@@ -131,7 +135,7 @@ public class PaginatedArrayList implements PaginatedList {
 	}
 
 	public List subList(int fromIndex, int toIndex) {
-		return page.subList(fromIndex, toIndex);
+		return new ArrayList(page.subList(fromIndex, toIndex));
 	}
 
 	/* List mutators (uses master list) */

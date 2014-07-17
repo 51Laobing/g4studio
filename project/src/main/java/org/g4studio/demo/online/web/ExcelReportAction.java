@@ -114,7 +114,7 @@ public class ExcelReportAction extends BaseAction {
 		if (fieldsList.size() <= toIndex) {
 			toIndex = fieldsList.size() - 1;
 		}
-		List subList = fieldsList.subList(0, toIndex);
+		List subList = new ArrayList(fieldsList.subList(0, toIndex));
 		parametersDto.put("countXmid", new Integer(subList.size()));// 合计条数
 		ExcelExporter excelExporter = new ExcelExporter();
 		excelExporter.setTemplatePath("/report/excel/demo/hisCatalogReport.xls");
@@ -143,7 +143,7 @@ public class ExcelReportAction extends BaseAction {
 		if (fieldsList.size() <= toIndex) {
 			toIndex = fieldsList.size() - 1;
 		}
-		List subList = fieldsList.subList(0, toIndex);
+		List subList = new ArrayList(fieldsList.subList(0, toIndex));
 		parametersDto.put("countXmid", new Integer(subList.size()));// 合计条数
 		ExcelExporter excelExporter = new ExcelExporter();
 		excelExporter.setTemplatePath("/report/excel/demo/hisCatalogReport2.xls");

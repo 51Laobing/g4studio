@@ -1,5 +1,6 @@
 package org.g4studio.demo.online.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -86,7 +87,7 @@ public class JasperReportAction extends BaseAction {
 		if (catalogList.size() <=toIndex) {
 			toIndex = catalogList.size() - 1;
 		}
-		List subList = catalogList.subList(0, toIndex);
+		List subList = new ArrayList(catalogList.subList(0, toIndex));
 		for (int i = 0; i < subList.size(); i++) {
 			Dto dto2 = (BaseDto)subList.get(i);
 			dto2.put("zfbl", dto2.getAsBigDecimal("zfbl"));

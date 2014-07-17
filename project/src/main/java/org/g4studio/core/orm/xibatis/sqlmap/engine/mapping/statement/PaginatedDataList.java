@@ -87,25 +87,25 @@ public class PaginatedDataList implements PaginatedList {
 			if (idx < 1) {
 				prevPageList = new ArrayList(0);
 				if (list.size() <= pageSize) {
-					currentPageList = list.subList(0, list.size());
+					currentPageList = new ArrayList(list.subList(0, list.size()));
 					nextPageList = new ArrayList(0);
 				} else {
-					currentPageList = list.subList(0, pageSize);
-					nextPageList = list.subList(pageSize, list.size());
+					currentPageList =  new ArrayList(list.subList(0, pageSize));
+					nextPageList =  new ArrayList(list.subList(pageSize, list.size()));
 				}
 			} else {
 				if (list.size() <= pageSize) {
-					prevPageList = list.subList(0, list.size());
+					prevPageList =  new ArrayList(list.subList(0, list.size()));
 					currentPageList = new ArrayList(0);
 					nextPageList = new ArrayList(0);
 				} else if (list.size() <= pageSize * 2) {
-					prevPageList = list.subList(0, pageSize);
-					currentPageList = list.subList(pageSize, list.size());
+					prevPageList =  new ArrayList(list.subList(0, pageSize));
+					currentPageList =  new ArrayList(list.subList(pageSize, list.size()));
 					nextPageList = new ArrayList(0);
 				} else {
-					prevPageList = list.subList(0, pageSize);
-					currentPageList = list.subList(pageSize, pageSize * 2);
-					nextPageList = list.subList(pageSize * 2, list.size());
+					prevPageList =  new ArrayList(list.subList(0, pageSize));
+					currentPageList =  new ArrayList(list.subList(pageSize, pageSize * 2));
+					nextPageList =  new ArrayList(list.subList(pageSize * 2, list.size()));
 				}
 			}
 		}
@@ -213,7 +213,7 @@ public class PaginatedDataList implements PaginatedList {
 	}
 
 	public List subList(int fromIndex, int toIndex) {
-		return currentPageList.subList(fromIndex, toIndex);
+		return new ArrayList(currentPageList.subList(fromIndex, toIndex));
 	}
 
 	public boolean add(Object o) {
