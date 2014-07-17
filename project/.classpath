@@ -105,10 +105,10 @@
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/asm-commons-3.1.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/asm-util-3.1.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/bboss-aop.jar"/>
-	<classpathentry kind="lib" path="webapp/WEB-INF/lib/bboss-security.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/bboss-security.jar" sourcepath="/bboss-security"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/bboss-soa.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/cglib-nodep-2.2.jar"/>
-	<classpathentry kind="lib" path="webapp/WEB-INF/lib/frameworkset-util.jar"/>
+	<classpathentry kind="lib" path="webapp/WEB-INF/lib/frameworkset-util.jar" sourcepath="/bboss-util"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/jarjar.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/mongo-java-driver-2.12.2.jar"/>
 	<classpathentry kind="lib" path="webapp/WEB-INF/lib/mongo-java-driver-javadoc-2.12.2.jar"/>

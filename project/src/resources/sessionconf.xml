@@ -18,7 +18,27 @@
 	  如果应用上下文为“/”时,appcode为ROOT
 	 -->
 			<!--<property name="appcode" value="10_25_192_142_pdp"/>-->
-            <property name="sessionlisteners" value="org.g4studio.common.util.BBossSessionListener"/>
+			<property name="appcode" value="pdp"/>
+			<property name="crossDomain" class="org.frameworkset.security.session.domain.CrossDomain" 
+			    f:domain="sany.com.cn"
+			    f:shareSessionAttrs="CREDENTIAL_INDEXS,SESSIONID_CACHE_KEY,PRINCIPAL_INDEXS"
+			    init-method="init">
+			    <property name="domainApps">
+				    <list componentType="bean">
+				        <property class="org.frameworkset.security.session.domain.App"
+				            	f:path="/SanyPDP"
+				            	f:attributeNamespace="SanyPDP_sany_com_cn_"
+				            	init-method="init"
+				            />				        
+				        <property class="org.frameworkset.security.session.domain.App"				            	
+				            	f:path="/g4studio"	
+				            	f:attributeNamespace="g4studio_sany_com_cn_"
+				            	init-method="init"
+				            />    
+				    </list>
+			    </property>
+			</property>    
+            <property name="sessionlisteners" value="org.frameworkset.security.session.impl.NullSessionListener"/>
 	</property>
 	
 	<property name="sessionStaticManager" class="org.frameworkset.security.session.statics.MongoSessionStaticManagerImpl"/>	
