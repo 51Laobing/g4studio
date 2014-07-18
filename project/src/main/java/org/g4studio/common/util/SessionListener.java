@@ -67,7 +67,7 @@ public class SessionListener implements HttpSessionListener {
 	public void sessionDestroyed(SessionEvent event) {
 		Session session = event.getSource();
 		if (session == null) return;
-		SessionContainer sessionContainer =  (SessionContainer)session.getAttribute("SessionContainer");
+		SessionContainer sessionContainer =  (SessionContainer)session.getCacheAttribute("SessionContainer");
 		if (sessionContainer == null) return;
 		sessionContainer.setUserInfo(null); //配合RequestFilter进行拦截
 		sessionContainer.cleanUp();
