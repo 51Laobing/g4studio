@@ -6,7 +6,7 @@
 			<property name="sessionTimeout" value="3600000"/>
 			<property name="sessionstore" refid="attr:sessionstore"/> 
 			<!-- <property name="sessionstore" value="session"/>-->
-			<property name="cookiename" value="b_sessionid"/>			
+			<property name="cookiename" value="g4_sessionid"/>			
 			<property name="httpOnly" value="true"/>
 			<property name="secure" value="false"/>
 	<!--
@@ -44,10 +44,11 @@
 				    </list>
 			    </property>
 			</property> -->   
+			<property name="startLifeScan" value="false"/>  
             <property name="sessionlisteners" value="org.g4studio.common.util.BBossSessionListener"/>
 	</property>
 	
-	<property name="sessionStaticManager" class="org.frameworkset.security.session.statics.MongoSessionStaticManagerImpl"/>	
+	<property name="sessionStaticManager" f:monitorScope="self" class="org.frameworkset.security.session.statics.MongoSessionStaticManagerImpl"/>	
 	
 	<property name="sessionstore" class="org.frameworkset.security.session.impl.MongDBSessionStore"/>
 </properties>
